@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script>
+        let txtTest = "turtle.up()"
+        const ws = new WebSocket("ws://localhost:25565")
+        function moveTurtleForward() {
+            ws.send("return turtle.forward()")
+        }
+        function moveTurtleRight() {
+            ws.send("return turtle.turnRight()")
+        }
+        function moveTurtleUp() {
+            ws.send("return turtle.up()")
+        }
+        function moveTurtleDown() {
+            ws.send("return turtle.down()")
+        }
+        function disableRedstone() {
+            ws.send('return redstone.setOutput("front", false)');
+        }
+        function outPutRedstone() {
+            ws.send('return redstone.setOutput("front", true)');
+        }
+        function placeItself() {
+            ws.send("return turtle.place()");
+        }
+        function programTest() {
+            ws.send("return print('not working lol')");
+        }
+        ws.addEventListener("message", msg => {
+            console.log(msg.data)
+        })
+    </script>
+</head>
+
+<body>
+    <button style="font-size: 100px;" onclick="moveTurtleForward()">forward</button>
+    <button style="font-size: 100px;" onclick="moveTurtleRight()">right</button>
+    <button style="font-size: 100px;" onclick="moveTurtleUp()">up</button>
+    <button style="font-size: 100px;" onclick="moveTurtleDown()">down</button>
+    <button style="font-size: 100px;" onclick="outPutRedstone()">redstoneFrontOn </button>
+    <button style="font-size: 100px;" onclick="disableRedstone()">redstoneFrontOff</button>
+    <button style="font-size: 100px;" onclick="placeItself()">recreate</button>
+
+    <button style="font-size: 100px;" onclick="programTest()">programTest</button>
+</body>
+
+</html>
